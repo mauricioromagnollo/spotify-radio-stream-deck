@@ -5,7 +5,11 @@ import { logger } from './util.js';
 const {
   location,
   pages: {
-    homeHTML
+    homeHTML,
+    controllerHTML
+  },
+  constants: {
+    CONTENT_TYPE
   }
 } = config;
 const controller = new Controller();
@@ -24,17 +28,49 @@ async function routes(request, response) {
   if(method === 'GET' && url === '/home') {
     const { stream } = await controller.getFileStream(homeHTML);
 
-    // O padrão do response é text/html
-    // response.writeHead(200, {
-    //   'Content-Type': 'text/html'
-    // })
     return stream.pipe(response);
   }
 
-  return response.end('hello');
+  if(method === 'GET' && url === '/controller') {
+    const { stream } = await controller.getFileStream(controllerHTML);
+
+    return stream.pipe(response);
+  }
+
+  if (method === 'GET') {
+    const {
+      stream,
+      type
+    } = await controller.getFileStream(url);
+
+    const contentType = CONTENT_TYPE[type];
+
+    if (contentType) {
+      response.writeHead(200, {
+        'Content-Type': contentType
+      });
+    }
+
+    return stream.pipe(response);
+  }
+
+  response.writeHead(404);
+  return response.end();
+}
+
+function handleError(error, response) {
+  if (error.message.includes('ENOENT')) {
+    logger.warn(`[#] Asset not found: ${error.stack}`);
+    response.writeHead(404);
+    return response.end();
+  }
+
+  logger.error(`[!] Error: ${error.stack}`);
+  response.writeHead(500);
+  return response.end();
 }
 
 export function handler(request, response) {
   return routes(request, response)
-    .catch(error => logger.error(`Error: ${error.stack}`));
+    .catch(error => handleError(error, response));
 }
