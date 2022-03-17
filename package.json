@@ -1,0 +1,16 @@
+{
+  "name": "spotify-radio-stream-deck",
+  "version": "1.0.0",
+  "description": "An stream deck to add sound effects inside audio transmissions.",
+  "author": "x0n4d0 <romagnolimauricio@gmail.com>",
+  "keywords": ["nodejs", "nodejs-streams"],
+  "license": "ISC",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+      "node": "17"
+  }
+}
