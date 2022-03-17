@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "An stream deck to add sound effects inside audio transmissions.",
   "author": "x0n4d0 <romagnolimauricio@gmail.com>",
-  "keywords": ["nodejs", "nodejs-streams"],
+  "keywords": [
+    "nodejs",
+    "nodejs-streams"
+  ],
   "license": "ISC",
   "main": "index.js",
   "type": "module",
@@ -11,7 +14,10 @@
     "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
   "engines": {
-      "node": "17"
+    "node": "17"
   }
 }
