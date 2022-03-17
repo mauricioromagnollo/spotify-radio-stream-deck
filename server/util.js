@@ -1,4 +1,4 @@
-import pino, { transport } from 'pino';
+import pino from 'pino';
 
 const log = pino({
   enabled: !(!!process.env.LOG_DISABLED),
