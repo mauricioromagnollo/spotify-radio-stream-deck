@@ -1,0 +1,45 @@
+--------------
+# Docker
+--------------
+-- Acess docker container:
+docker exec -it <CONTAINER_ID> bash
+
+--------------
+# Sox
+--------------
+sox \
+  --i \
+  "audio/songs/conversation.mp3"
+
+sox \
+  --i \
+  "audio/fx/Boo! Sound Effect (128 kbps).mp3"
+
+-- Convert to the same bitrate
+sox \
+  -v 0.99 \
+  -t mp3 \
+  "audio/fx/Applause Sound Effect HD No Copyright (128 kbps).mp3" \
+  -r 48000 \
+  -t mp3 \
+  "output.mp3"
+
+-- Get bitrate
+sox \
+  --i \
+  -B \
+  "audio/fx/Boo! Sound Effect (128 kbps).mp3"
+
+128k
+-- Concat two audios
+sox \
+  -t mp3 \
+  -v 0.99 \
+  -m "audio/songs/conversation.mp3" \
+  -t mp3 \
+  -v 0.99 \
+  "audio/fx/Fart - Gaming Sound Effect (HD) (128 kbps).mp3" \
+  -t mp3 \
+  "output.mp3"
+
+// obter o bitrate

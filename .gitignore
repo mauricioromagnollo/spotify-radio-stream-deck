@@ -5,6 +5,7 @@ node_modules
 temp
 tmp
 *.txt
+!commands.txt
 
 # test
 coverage
