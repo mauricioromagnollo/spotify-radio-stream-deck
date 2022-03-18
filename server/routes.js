@@ -6,32 +6,32 @@ const {
   location,
   pages: {
     homeHTML,
-    controllerHTML
+    controllerHTML,
   },
   constants: {
-    CONTENT_TYPE
-  }
+    CONTENT_TYPE,
+  },
 } = config;
 const controller = new Controller();
 
 async function routes(request, response) {
   const { method, url } = request;
 
-  if(method === 'GET' && url === '/') {
+  if (method === 'GET' && url === '/') {
     response.writeHead(302, {
-      'Location': location.home
+      Location: location.home,
     });
 
     return response.end();
   }
 
-  if(method === 'GET' && url === '/home') {
+  if (method === 'GET' && url === '/home') {
     const { stream } = await controller.getFileStream(homeHTML);
 
     return stream.pipe(response);
   }
 
-  if(method === 'GET' && url === '/controller') {
+  if (method === 'GET' && url === '/controller') {
     const { stream } = await controller.getFileStream(controllerHTML);
 
     return stream.pipe(response);
@@ -40,14 +40,14 @@ async function routes(request, response) {
   if (method === 'GET') {
     const {
       stream,
-      type
+      type,
     } = await controller.getFileStream(url);
 
     const contentType = CONTENT_TYPE[type];
 
     if (contentType) {
       response.writeHead(200, {
-        'Content-Type': contentType
+        'Content-Type': contentType,
       });
     }
 
@@ -72,5 +72,5 @@ function handleError(error, response) {
 
 export function handler(request, response) {
   return routes(request, response)
-    .catch(error => handleError(error, response));
+    .catch((error) => handleError(error, response));
 }

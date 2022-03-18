@@ -6,8 +6,8 @@ import config from './config.js';
 
 const {
   dir: {
-    publicDirectory
-  }
+    publicDirectory,
+  },
 } = config;
 
 export class Service {
@@ -23,8 +23,8 @@ export class Service {
 
     return {
       type: fileType,
-      name: fullFilePath
-    }
+      name: fullFilePath,
+    };
   }
 
   async getFileStream(file) {
@@ -32,7 +32,7 @@ export class Service {
 
     return {
       stream: this.createFileStream(name),
-      type
-    }
+      type,
+    };
   }
 }
